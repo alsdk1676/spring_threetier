@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>로그인</title>
+</head>
+<body>
+<div>
+    <input id="code-confirm-input" placeholder="인증번호"/>
+    <button id="code-confirm" type="button">인증번호 확인</button>
+</div>
+<form th:action="@{/member/login}" method="post" th:object="${memberVO}">
+    <div><input th:field="*{memberEmail}" placeholder="이메일"/></div>
+    <div><input th:field="*{memberPassword}" placeholder="비밀번호"/></div>
+    <button id="submit-button" type="button">로그인</button>
+</form>
+</body>
+<script th:inline="javascript">
+
+    const flag = [[${login}]];
+    const memberVO = [[${memberVO}]]
+    const code = [[${code}]]
+    globalThis.codeConfirm = false;
+
+    const inputs = document.querySelectorAll("form input")
+    const submitButton = document.querySelector("#submit-button");
+    const form = document.querySelector("form")
+
+    if(flag != null && !flag){
+        alert("아이디 또는 비밀번호를 확인해주세요.")
+    }
+
+    // 인증번호
+    const codeConfirmInput = document.querySelector("#code-confirm-input")
+    const codeConfirmButton = document.querySelector("#code-confirm")
+
+    codeConfirmButton.addEventListener("click", (e) => {
+        if(parseInt(codeConfirmInput.value) !== code){
+            alert("인증번호를 확인해주세요")
+        }
+        alert("인증번호 확인 완료")
+        globalThis.codeConfirm = true;
+    })
+    console.log(code)
+
+    submitButton.addEventListener("click", () => {
+        for(let input of inputs){
+            if(!input.value) return alert(`${input.name} 값을 입력하세요`)
+        }
+        form.submit();
+    })
+
+</script>
+</html>

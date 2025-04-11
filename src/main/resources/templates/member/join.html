@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입</title>
+</head>
+<body>
+    <form th:action="@{/member/join}" method="post" th:object="${memberVO}">
+    <!-- name : memberVO의 필드값과 같아야 함 -->
+<!--        <div><input name="memberEmail"/></div>-->
+<!--        <div><input name="memberPassword"/></div>-->
+<!--        <div><input name="memberName"/></div>        -->
+<!-- name : 매핑이 안되면 오류 대신 null 값으로 들어감 => 컴파일 시점에 오류 발견할 수 없음 -->
+<!-- field : 매핑이 안되면 컴파일 시점에 바로 오류 발견 가능 => 안전성이 좋음 -->
+        <div><input th:field="*{memberEmail}" placeholder="이메일"/></div>
+        <div><input th:field="*{memberPassword}" placeholder="비밀번호"/></div>
+        <div><input th:field="*{memberName}" placeholder="이름"/></div>
+        <button type="button">회원가입</button>
+    </form>
+
+</body>
+<script>
+    const inputs = document.querySelectorAll("input")
+    const submitButton = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    submitButton.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(`${input.name} 값을 입력하세요!`)
+        }
+        form.submit();
+    })
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>상품 리스트</title>
+</head>
+<body>
+<!--@ModelAttribute ProductVO productVO-->
+<!--@ModelAttribute("product") ProductVO productVO-->
+<!--object="${product}-->
+    <table th:object="${productVO}">
+        <tr>
+            <th>상품명</th>
+            <th>상품가격</th>
+        </tr>
+        <tr>
+            <!-- * : object의 필드값(키 값)에 접근 가능 -->
+            <td th:text="*{productName}"></td>
+            <td th:text="*{productPrice}"></td>
+        </tr>
+    </table>
+</body>
+</html>

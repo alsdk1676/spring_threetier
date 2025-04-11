@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시판 리스트 페이지</title>
+    <style>
+        th, td {
+            border : solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='/member/logout'">로그아웃</button>
+    <!--한쌍이여서 조건문 동일해야 함-->
+    <th:block th:if="${posts != null and #lists.size(posts) != 0}"> <!-- if문이 true일 때 -->
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+            </tr>
+            <th:block th:each="post : ${posts}"> <!-- 반복되니까 block, 화면 쪽은 빠른 for문 사용하기-->
+                <tr th:object="${post}">
+                    <td th:text="*{postTitle}"></td>
+                    <td th:text="*{postContent}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </th:block>
+    <th:block th:unless="${posts != null and #lists.size(posts) != 0}"> <!-- if문이 false일 때 -->
+        <h1>게시물이 없습니다.</h1>
+    </th:block>
+
+
+
+</body>
+<script th:inline="javascript">
+    // const member = [[${session.member}]]
+    // const product = [[${session.product}]]
+    //
+    // console.log(member)
+    // console.log(product)
+
+    const posts = [[${posts}]]
+    // console.log(posts)
+
+</script>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자바의 인터페이스랑 연결 -->
+<mapper namespace="com.app.threetier.mapper.PostMapper">
+    <select id="selectAll" resultType="PostVO">
+        SELECT ID, POST_TITLE, POST_CONTENT, POST_READ_COUNT, MEMBER_ID
+        FROM TBL_POST
+    </select>
+
+    <delete id="deleteAll" parameterType="Long">
+        DELETE FROM TBL_POST
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
+
+
+</mapper>
