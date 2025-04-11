@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자바의 인터페이스랑 연결 -->
+<mapper namespace="com.app.threetier.mapper.ProductMapper">
+
+    <insert id="insert" parameterType="ProductVO">
+        INSERT INTO TBL_PRODUCT
+        VALUES (SEQ_PRODUCT.NEXTVAL, #{productName}, #{productPrice}, #{productStock}, #{productBrand})
+    </insert>
+
+    <select id="select" parameterType="Long" resultType="ProductVO" >
+        SELECT ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRODUCT_BRAND
+        FROM TBL_PRODUCT
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectAll" resultType="ProductVO" >
+        SELECT ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRODUCT_BRAND
+        FROM TBL_PRODUCT
+    </select>
+
+
+</mapper>

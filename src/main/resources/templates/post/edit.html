@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시글 수정 페이지</title>
+</head>
+<body>
+<form th:action="@{/post/edit}" method="post" th:object="${postVO}">
+    <input type="hidden" th:field="*{id}">
+    <input th:field="*{postTitle}" placeholder="제목" th:value="${postVO.postTitle}" />
+    <input th:field="*{postContent}"  placeholder="내용" th:value="${postVO.postContent}"/>
+    <input type="hidden" name="memberId" th:value="${memberId}">
+    <button type="button">완료</button>
+</form>
+</body>
+<script th:inline="javascript">
+    console.log([[${postVO}]])
+    console.log([[${memberId}]])
+
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs){
+            if(!input.value) return alert(`${input.name} 값을 입력해주세요`)
+        }
+        form.submit()
+    })
+
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시글 작성 페이지</title>
+</head>
+<body>
+    <form th:action="@{/post/write}" method="post" th:object="${postVO}">
+        <input th:field="*{postTitle}" placeholder="제목" />
+        <input th:field="*{postContent}" placeholder="내용" />
+        <input type="hidden" name="memberId" th:value="${memberId}"/>
+        <button type="button">완료</button>
+<!--  field에서는 memberId가 null값이기 때문에 name으로 / th:value="${memberId}" model의 memeberId     -->
+
+    </form>
+</body>
+<script th:inline="javascript">
+    console.log([[${postVO}]])
+    console.log([[${memberId}]]) // session에서 가져옴
+
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+        }
+        form.submit();
+    })
+
+</script>
+</html>

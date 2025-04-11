@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/post/list.css}">
     <title>게시판 리스트 페이지</title>
     <style>
         th, td {
@@ -13,7 +14,10 @@
     </style>
 </head>
 <body>
+    <button onclick="window.location.href='/post/write'">글 작성하기</button>
+    <button onclick="window.location.href='/member/login'">로그인</button>
     <button onclick="window.location.href='/member/logout'">로그아웃</button>
+    <button onclick="window.location.href='/member/withdraw'">탈퇴</button>
     <!--한쌍이여서 조건문 동일해야 함-->
     <th:block th:if="${posts != null and #lists.size(posts) != 0}"> <!-- if문이 true일 때 -->
         <table>
@@ -23,7 +27,13 @@
             </tr>
             <th:block th:each="post : ${posts}"> <!-- 반복되니까 block, 화면 쪽은 빠른 for문 사용하기-->
                 <tr th:object="${post}">
-                    <td th:text="*{postTitle}"></td>
+                    <td>
+<!--                        <a th:hret="@{/post/read}"-->
+                        <a th:href="@{/post/read(id=${post.id})}">
+                            <span th:text="*{postTitle}"></span>
+                        </a>
+                    </td>
+<!--                    <td th:text="*{postTitle}"></td>-->
                     <td th:text="*{postContent}"></td>
                 </tr>
             </th:block>

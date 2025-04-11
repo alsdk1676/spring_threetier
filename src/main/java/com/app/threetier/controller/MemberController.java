@@ -3,6 +3,7 @@ package com.app.threetier.controller;
 import com.app.threetier.domain.MemberVO;
 import com.app.threetier.domain.ProductVO;
 import com.app.threetier.mapper.MemberMapper;
+import com.app.threetier.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class MemberController {
     private final MemberMapper memberMapper;
 //    로그인 된 유저의 정보를 session에 담기
     private final HttpSession session;
+    private final MemberService memberService;
 
 //  회원가입
 
@@ -94,4 +96,11 @@ public class MemberController {
         return new RedirectView("/member/login");
     }
 
+
+//    회원탈퇴
+    @GetMapping("withdraw")
+    public RedirectView withdraw() {
+        memberService.withdraw(((MemberVO)session.getAttribute("member")).getId());
+        return new RedirectView("/member/login");
+    }
 }
