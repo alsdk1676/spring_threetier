@@ -2,6 +2,7 @@ package com.app.threetier.service;
 
 import com.app.threetier.domain.UserVO;
 import com.app.threetier.mapper.UserMapper;
+import com.app.threetier.repository.NoticeDAO;
 import com.app.threetier.repository.UserDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+    private final NoticeDAO noticeDAO;
 
     @Override
     public void joinUser(UserVO userVO) {
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void withdraw(Long id) {
+        noticeDAO.deleteAll(id);
         userDAO.delete(id);
     }
 }

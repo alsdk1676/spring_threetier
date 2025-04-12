@@ -23,6 +23,6 @@ public class UserController {
     private final HttpSession session;
 
 //    로그인
-    @GetMapping("join")
-    @PostMapping("join")
+//    @GetMapping("join")
+//    @PostMapping("join")
 }

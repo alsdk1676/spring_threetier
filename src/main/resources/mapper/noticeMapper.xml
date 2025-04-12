@@ -3,6 +3,36 @@
 <!-- 자바의 인터페이스랑 연결 -->
 <mapper namespace="com.app.threetier.mapper.NoticeMapper">
 
+    <insert id="insert" parameterType="NoticeVO">
+        INSERT INTO TBL_NOTICE
+        VALUES(SEQ_NOTICE.NEXTVAL, #{noticeTitle}, #{noticeContent}, #{userId}, #{noticeReadCount})
+    </insert>
 
+    <select id="selectAll" resultType="NoticeVO">
+        SELECT ID, NOTICE_TITLE, NOTICE_CONTENT, USER_ID, NOTICE_READ_COUNT
+        FROM TBL_NOTICE
+    </select>
+
+    <select id="select" parameterType="Long" resultType="NoticeVO">
+        SELECT ID, NOTICE_TITLE, NOTICE_CONTENT, USER_ID, NOTICE_READ_COUNT
+        FROM TBL_NOTICE
+        WHERE ID = #{id}
+    </select>
+
+    <update id="update" parameterType="NoticeVO">
+        UPDATE TBL_NOTICE
+        SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM TBL_NOTICE
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll" parameterType="Long">
+        DELETE FROM TBL_NOTICE
+        WHERE USER_ID = #{userId}
+    </delete>
 
 </mapper>
