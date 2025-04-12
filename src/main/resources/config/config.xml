@@ -10,5 +10,6 @@
         <typeAlias type="com.app.threetier.domain.PostVO" alias="PostVO" />
         <typeAlias type="com.app.threetier.domain.ProductVO" alias="ProductVO" />
         <typeAlias type="com.app.threetier.domain.UserVO" alias="UserVO" />
+        <typeAlias type="com.app.threetier.domain.NoticeVO" alias="NoticeVO" />
     </typeAliases>
 </configuration>
