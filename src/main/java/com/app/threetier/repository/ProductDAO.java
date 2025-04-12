@@ -13,6 +13,11 @@ import java.util.Optional;
 public class ProductDAO {
     private final ProductMapper productMapper;
 
+//    상품 등록
+    public void save(ProductVO productVO) {
+        productMapper.insert(productVO);
+    }
+
 //    상품 조회
     public Optional<ProductVO> findById(Long id) {
         return productMapper.select(id);
@@ -23,8 +28,4 @@ public class ProductDAO {
         return productMapper.selectAll();
     }
 
-//    상품 등록
-    public void save(ProductVO productVO) {
-        productMapper.insert(productVO);
-    }
 }

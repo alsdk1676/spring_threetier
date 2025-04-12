@@ -28,7 +28,7 @@
             <th:block th:each="post : ${posts}"> <!-- 반복되니까 block, 화면 쪽은 빠른 for문 사용하기-->
                 <tr th:object="${post}">
                     <td>
-<!--                        <a th:hret="@{/post/read}"-->
+<!--                        <a th:href="@{/post/read}"-->
                         <a th:href="@{/post/read(id=${post.id})}">
                             <span th:text="*{postTitle}"></span>
                         </a>

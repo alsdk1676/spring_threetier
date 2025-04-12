@@ -11,9 +11,24 @@
     <form th:action="@{/product/write}" method="post" th:object="${productVO}">
         <input th:field="*{productName}" placeholder="상품명"/>
         <input th:field="*{productPrice}" placeholder="상품가격"/>
-        <input th:field="*{productBrand}" placeholder="브랜드"/>
+        <input th:field="*{productStock}" placeholder="상품재고"/>
+        <input th:field="*{productBrand}" placeholder="브랜드명"/>
         <button type="button">상품 등록</button>
     </form>
 
 </body>
+<script th:inline="javascript">
+    // console.log([[${productVO}]])
+
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+        }
+        form.submit();
+    })
+</script>
 </html>
