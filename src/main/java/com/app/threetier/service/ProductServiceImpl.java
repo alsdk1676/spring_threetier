@@ -31,4 +31,16 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductVO> getListProduct() {
         return productDAO.findAll();
     }
+
+//    상품 수정
+    @Override
+    public void edit(ProductVO productVO) {
+        productDAO.editById(productVO);
+    }
+
+//    상품 삭제
+    @Override
+    public void remove(Long id) {
+        productDAO.deleteById(id);
+    }
 }

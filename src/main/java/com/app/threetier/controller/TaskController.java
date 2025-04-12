@@ -43,4 +43,23 @@ public class TaskController {
             throw new RuntimeException("Product Not Found");
         }));
     }
+    //    상품 수정
+    @GetMapping("edit")
+    public void goToEdit(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        ProductVO productVO = productService.getProductById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
+        model.addAttribute("product", productVO);
+    }
+
+    @PostMapping("edit")
+    public RedirectView edit(ProductVO productVO) {
+        productService.edit(productVO);
+        return new RedirectView("/product/list");
+    }
+
+    @GetMapping("remove")
+    public RedirectView remove(@RequestParam("id") Long id) {
+        productService.remove(id);
+        return new RedirectView("/product/list");
+    }
 }

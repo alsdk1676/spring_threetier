@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>상품 수정 페이지</title>
+</head>
+<body>
+    <form th:action="@{/product/edit}" method="post" th:object="${product}">
+        <input type="hidden" th:field="*{id}" />
+        <input th:field="*{productName}" placeholder="상품명" th:value="${product.productName}"/>
+        <input th:field="*{productPrice}" placeholder="상품가격" th:value="${product.productPrice}"/>
+        <input th:field="*{productStock}" placeholder="상품재고" th:value="${product.productStock}"/>
+        <input th:field="*{productBrand}" placeholder="브랜드명" th:value="${product.productBrand}"/>
+        <button type="button">수정하기</button>
+    </form>
+
+</body>
+<script th:inline="javascript">
+    // console.log([[${productVO}]])
+
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+        }
+        form.submit();
+    })
+</script>
+</html>

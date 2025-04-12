@@ -28,4 +28,14 @@ public class ProductDAO {
         return productMapper.selectAll();
     }
 
+//    상품 수정
+    public void editById(ProductVO productVO) {
+        productMapper.update(productVO);
+    }
+
+//    상품 삭제
+    public void deleteById(Long id) {
+        productMapper.delete(id);
+    }
+
 }

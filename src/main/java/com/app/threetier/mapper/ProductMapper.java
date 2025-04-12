@@ -18,4 +18,9 @@ public interface ProductMapper {
 //    상품 전체 조회
     public List<ProductVO> selectAll();
 
+//    상품 수정
+    public void update(ProductVO productVO);
+
+//    상품 삭제
+    public void delete(Long id);
 }
