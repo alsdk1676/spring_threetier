@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입</title>
+</head>
+<body>
+    <form th:action="@{/user/join}" method="post" th:object="${userVO}">
+        <div><input th:field="*{userEmail}" placeholder="이메일 입력"/></div>
+        <div><input th:field="*{userPassword}" placeholder="비밀번호 입력"/></div>
+        <div><input th:field="*{userName}" placeholder="이름 입력"/></div>
+        <button type="button">회원가입</button>
+    </form>
+</body>
+<script th:inline="javascript">
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) {
+                return alert(`${input.name}값을 입력하세요`)
+            }
+        }
+        form.submit();
+    })
+</script>
+</html>

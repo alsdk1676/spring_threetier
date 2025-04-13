@@ -51,7 +51,6 @@ public class UserController {
             session.setAttribute("user", foundUser.get());
             session.setAttribute("notice", new NoticeVO());
             return new RedirectView("/notice/list");
-
         }
         redirectAttributes.addFlashAttribute("login", false);
         return new RedirectView("/user/login");
