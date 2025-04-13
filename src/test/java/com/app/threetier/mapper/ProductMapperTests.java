@@ -51,11 +51,11 @@ public class ProductMapperTests {
     @Test
     public void productUpdate(){
         ProductVO productVO = new ProductVO();
-        productVO.setId(1L);
-        productVO.setProductName("수정된 상품1");
-        productVO.setProductPrice(150000);
-        productVO.setProductStock(10);
-        productVO.setProductBrand("수정된 브랜드1");
+        productVO.setId(2L);
+        productVO.setProductName("상품2 수정함");
+        productVO.setProductPrice(250000);
+        productVO.setProductStock(25);
+        productVO.setProductBrand("브랜드2 수정함");
         productMapper.update(productVO);
         log.info(productVO.toString());
     }
