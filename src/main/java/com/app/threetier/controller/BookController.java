@@ -22,10 +22,10 @@ public class BookController {
 
 //    도서 등록
     @GetMapping("write")
-    public void goToWrite() {;}
+    public void goToWrite(BookVO bookVO) {;}
 
     @PostMapping("write")
-    public RedirectView goToWrite(BookVO bookVO) {
+    public RedirectView write(BookVO bookVO) {
         bookService.register(bookVO);
         return new RedirectView("/book/list");
     }

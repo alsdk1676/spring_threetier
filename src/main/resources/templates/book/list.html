@@ -1,13 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>도서 리스트</title>
 </head>
 <body>
+    <th:block th:if="${books != null}">
+        <table>
+            <tr>
+                <th>도서명</th>
+                <th>작가명</th>
+                <th>도서가격</th>
+                <th>도서재고</th>
+            </tr>
+            <th:block th:each="book : ${books}">
+                <tr th:object="${book}">
+                    <td>
+                        <a th:href="@{/book/read(id=${book.id})}">
+                            <span th:text="*{bookTitle}"></span>
+                        </a>
+                    </td>
+                    <td th:text="*{bookAuthor}"></td>
+                    <td th:text="*{bookPrice}"></td>
+                    <td th:text="*{bookStock}"></td>
+                </tr>
+            </th:block>
+        </table>
+        <button onclick="window.location.href='/book/write'">도서 등록하기</button>
+    </th:block>
+    <th:block th:unless="${books != null}">
+        <p>도서 없음</p>
+    </th:block>
 
 </body>
 </html>

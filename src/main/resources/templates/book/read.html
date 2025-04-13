@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>도서 상세</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>도서명</th>
+            <th>작가명</th>
+            <th>도서가격</th>
+            <th>도서재고</th>
+        </tr>
+        <tr th:object="${book}">
+            <td th:text="*{bookTitle}"></td>
+            <td th:text="*{bookAuthor}"></td>
+            <td th:text="*{bookPrice}"></td>
+            <td th:text="*{bookStock}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/book/list}">목록으로</a>
+    <a th:href="@{/book/edit(id=${book.id})}">수정하기</a>
+    <a th:href="@{/book/remove(id=${book.id})}">삭제하기</a>
+
+</body>
+</html>
