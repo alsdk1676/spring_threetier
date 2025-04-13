@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자바의 인터페이스랑 연결 -->
+<mapper namespace="com.app.threetier.mapper.BookMapper">
+
+    <insert id="insert" parameterType="BookVO">
+        INSERT INTO TBL_BOOK
+        VALUES(SEQ_BOOK.NEXTVAL, #{bookTitle}, #{bookAuthor}, #{bookPrice}, #{bookStock})
+    </insert>
+
+    <select id="selectAll" resultType="BookVO">
+        SELECT ID, BOOK_TITLE, BOOK_AUTHOR, BOOK_PRICE, BOOK_STOCK
+        FROM TBL_BOOK
+    </select>
+
+    <select id="select" parameterType="Long" resultType="BookVO">
+        SELECT ID, BOOK_TITLE, BOOK_AUTHOR, BOOK_PRICE, BOOK_STOCK
+        FROM TBL_BOOK
+        WHERE ID = #{id}
+    </select>
+
+    <update id="update" parameterType="BookVO">
+        UPDATE TBL_BOOK
+        SET BOOK_TITLE = #{bookTitle}, BOOK_AUTHOR = #{bookAuthor}, BOOK_PRICE = #{bookPrice}, BOOK_STOCK = #{bookStock}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM TBL_BOOK
+        WHERE ID = #{id}
+    </delete>
+
+
+
+
+</mapper>

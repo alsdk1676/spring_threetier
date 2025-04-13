@@ -11,5 +11,6 @@
         <typeAlias type="com.app.threetier.domain.ProductVO" alias="ProductVO" />
         <typeAlias type="com.app.threetier.domain.UserVO" alias="UserVO" />
         <typeAlias type="com.app.threetier.domain.NoticeVO" alias="NoticeVO" />
+        <typeAlias type="com.app.threetier.domain.BookVO" alias="BookVO" />
     </typeAliases>
 </configuration>
