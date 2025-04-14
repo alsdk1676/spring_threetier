@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자바의 인터페이스랑 연결 -->
+<mapper namespace="com.app.threetier.mapper.StudentMapper">
+
+    <insert id="insert" parameterType="StudentVO">
+        INSERT INTO VIEW_STUDENT(ID, KOR, ENG, MATH)
+        VALUES(SEQ_STUDENT.NEXTVAL, #{kor}, #{eng}, #{math})
+    </insert>
+
+    <select id="selectAll" resultType="StudentVO">
+        SELECT ID, KOR, ENG, MATH, TOTAL, AVERAGE
+        FROM VIEW_STUDENT
+    </select>
+
+
+
+</mapper>

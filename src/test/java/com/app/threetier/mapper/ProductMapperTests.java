@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -22,6 +23,8 @@ public class ProductMapperTests {
     public void productInsert() {
         ProductVO productVO = new ProductVO();
         productVO.setProductName("상품5");
+//        Integer
+//        productVO.setProductPrice(Integer.valueof());
         productVO.setProductPrice(500000);
         productVO.setProductStock(50);
         productVO.setProductBrand("브랜드5");
@@ -44,7 +47,10 @@ public class ProductMapperTests {
 //    상품 전체 조회
     @Test
     public void productSelectAll(){
-        productMapper.selectAll().stream().map(ProductVO::toString).forEach(log::info);
+//        productMapper.selectAll().stream().map(ProductVO::toString).forEach(log::info);
+
+        List<ProductVO> productList = productMapper.selectAll();
+        productList.stream().map(ProductVO::toString).forEach(log::info);
     }
 
 //    상품 수정
@@ -60,4 +66,11 @@ public class ProductMapperTests {
         log.info(productVO.toString());
     }
 
+//    상품 삭제
+    @Test
+    public void productDelete(){
+        ProductVO productVO = new ProductVO();
+        productVO.setId(6L);
+        productMapper.delete(productVO.getId());
+    }
 }

@@ -8,28 +8,49 @@
     <title>상품 수정 페이지</title>
 </head>
 <body>
+<!--    <form th:action="@{/product/edit}" method="post" th:object="${product}">-->
+<!--        <input type="hidden" th:field="*{id}" />-->
+<!--        <input th:field="*{productName}" placeholder="상품명" th:value="${product.productName}"/>-->
+<!--        <input th:field="*{productPrice}" placeholder="상품가격" th:value="${product.productPrice}"/>-->
+<!--        <input th:field="*{productStock}" placeholder="상품재고" th:value="${product.productStock}"/>-->
+<!--        <input th:field="*{productBrand}" placeholder="브랜드명" th:value="${product.productBrand}"/>-->
+<!--        <button type="button">수정하기</button>-->
+<!--    </form>-->
     <form th:action="@{/product/edit}" method="post" th:object="${product}">
-        <input type="hidden" th:field="*{id}" />
-        <input th:field="*{productName}" placeholder="상품명" th:value="${product.productName}"/>
-        <input th:field="*{productPrice}" placeholder="상품가격" th:value="${product.productPrice}"/>
-        <input th:field="*{productStock}" placeholder="상품재고" th:value="${product.productStock}"/>
-        <input th:field="*{productBrand}" placeholder="브랜드명" th:value="${product.productBrand}"/>
+        <input type="hidden" th:field="*{id}">
+        <input th:field="*{productName}" placeholder="상품명" />
+        <input th:field="*{productPrice}" placeholder="상품명" />
+        <input th:field="*{productStock}" placeholder="상품명" />
+        <input th:field="*{productBrand}" placeholder="상품명" />
         <button type="button">수정하기</button>
     </form>
-
 </body>
 <script th:inline="javascript">
     // console.log([[${productVO}]])
 
-    const inputs = document.querySelectorAll("input")
-    const button = document.querySelector("button")
+    // const inputs = document.querySelectorAll("input")
+    // const button = document.querySelector("button")
+    // const form = document.querySelector("form")
+    //
+    // button.addEventListener("click", () => {
+    //     for(let input of inputs) {
+    //         if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+    //     }
+    //     form.submit();
+    // })
+
+    const inputs = document.querySelectorAll("input");
+    const button = document.querySelector("button");
     const form = document.querySelector("form")
 
     button.addEventListener("click", () => {
         for(let input of inputs) {
-            if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+            if(!input.value) {
+                return alert(`${input.name} 값을 입력하세요`)
+            }
         }
         form.submit();
     })
+
 </script>
 </html>

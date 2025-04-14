@@ -8,22 +8,40 @@
     <title>상품 정보 상세보기</title>
 </head>
 <body>
+<!--    <table th:object="${product}">-->
+<!--        <tr>-->
+<!--            <th>상품명</th>-->
+<!--            <th>상품가격</th>-->
+<!--            <th>상품재고</th>-->
+<!--            <th>브랜드</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td th:text="*{productName}"></td>-->
+<!--            <td th:text="*{productPrice}"></td>-->
+<!--            <td th:text="*{productStock}"></td>-->
+<!--            <td th:text="*{productBrand}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--    <a th:href="@{/product/edit(id=${product.id})}">수정하기</a>-->
+<!--    <a th:href="@{/product/remove(id=${product.id})}">삭제하기</a>-->
+<!--    <a th:href="@{/product/list}">목록으로</a>-->
+
     <table th:object="${product}">
         <tr>
             <th>상품명</th>
             <th>상품가격</th>
             <th>상품재고</th>
-            <th>브랜드</th>
+            <th>상품브랜드</th>
         </tr>
         <tr>
-            <td th:text="*{productName}"></td>
-            <td th:text="*{productPrice}"></td>
-            <td th:text="*{productStock}"></td>
-            <td th:text="*{productBrand}"></td>
+            <td th:field="*{productName}"></td>
+            <td th:field="*{productPrice}"></td>
+            <td th:field="*{productStock}"></td>
+            <td th:field="*{productBrand}"></td>
         </tr>
     </table>
-    <a th:href="@{/product/edit(id=${product.id})}">수정하기</a>
-    <a th:href="@{/product/remove(id=${product.id})}">삭제하기</a>
     <a th:href="@{/product/list}">목록으로</a>
+    <a th:href="@{/product/edit(id=${product.id})}">수정</a>
+    <a th:href="@{/product/remove(id=${product.id})}">삭제</a>
 </body>
 </html>

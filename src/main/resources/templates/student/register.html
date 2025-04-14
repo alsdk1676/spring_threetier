@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>점수 등록 페이지</title>
+</head>
+<body>
+    <form th:action="@{/student/register}" method="post" th:object="${studentVO}">
+        <input th:field="*{kor}" placeholder="국어 점수"/>
+        <input th:field="*{eng}" placeholder="영어 점수"/>
+        <input th:field="*{math}" placeholder="수학 점수"/>
+        <button type="button">등록</button>
+    </form>
+
+</body>
+<script th:inline="javascript">
+    // console.log([[${productVO}]])
+
+    const inputs = document.querySelectorAll("input")
+    const button = document.querySelector("button")
+    const form = document.querySelector("form")
+
+    button.addEventListener("click", () => {
+        for(let input of inputs) {
+            if(!input.value) return alert(`${input.name}값을 입력해주세요`)
+        }
+        form.submit();
+    })
+</script>
+</html>

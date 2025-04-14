@@ -38,7 +38,12 @@ public class BookController {
 
 //    도서 단일 조회
     @GetMapping("read")
-    public void read(@RequestParam("id") Long id, Model model) {
+//    public void read(@RequestParam("id") Long id, Model model) {
+//        model.addAttribute("book", bookService.getById(id).orElseThrow(() -> {
+//            throw new RuntimeException("Book not found");
+//        }));
+//    }
+    public void read(@RequestParam("id") long id, Model model) {
         model.addAttribute("book", bookService.getById(id).orElseThrow(() -> {
             throw new RuntimeException("Book not found");
         }));
@@ -46,6 +51,12 @@ public class BookController {
 
 //    도서 수정
     @GetMapping("edit")
+//    public void goToEdit(@RequestParam("id") Long id, Model model) {
+//        model.addAttribute("book", bookService.getById(id));
+//        BookVO bookVO = bookService.getById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+//        model.addAttribute("book", bookVO);
+//    }
+
     public void goToEdit(@RequestParam("id") Long id, Model model) {
         model.addAttribute("book", bookService.getById(id));
         BookVO bookVO = bookService.getById(id).orElseThrow(() -> new RuntimeException("Book not found"));
