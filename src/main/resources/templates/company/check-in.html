@@ -8,8 +8,11 @@
     <title>check-in</title>
 </head>
 <body>
+<!--resources/templates/fix/header.html-->
 <!-- ~{/} : template 경로, 확장자 없음 :: 태그 선택자 (대부분 id로 넘김) -->
 <!-- replace : 정적 페이지를 처리하고 싶을 떄 사용 -->
+<!--:: #header : id=header 불러옴-->
+<!--버튼을 누르면 flag가 누르는 구조, 버튼 2개 중 어떤 걸 눌렀는지 구분하기 위해서 hidden 사용-->
     <header th:replace="~{/fix/header :: #header}"></header>
     <form th:action="@{/company/check-in}" method="post" th:object="${companyVO}">
         <input th:field="*{companyName}" placeholder="이름 입력" />
@@ -24,11 +27,14 @@
 
     buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
+            // 클릭된 버튼의 텍스트("출근" 또는 "퇴근")를 가져옴
             const flag = e.target.innerText; // 출근 누르면 innerText = "출근", 퇴근 누르면 innerTest = "퇴근"
             const flagInputValue = document.querySelector("input[name='flag']")
 
             // 컨트롤러와 연관! 출근 넣으면 getToWork 넣어놓고 submit => back에 넣어줌
             // method = post => 컨트롤러 @PostMapping
+            // <input type="hidden" name="flag" />
+            // 출근 누르면 flag = getToWork, 퇴근 누르면 flag = leaveWork
             flagInputValue.value = flag === "출근" ? "getToWork" : "leaveWork"
             form.submit();
         })
