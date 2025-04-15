@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>check-in</title>
+</head>
+<body>
+<!-- ~{/} : template 경로, 확장자 없음 :: 태그 선택자 (대부분 id로 넘김) -->
+<!-- replace : 정적 페이지를 처리하고 싶을 떄 사용 -->
+    <header th:replace="~{/fix/header :: #header}"></header>
+    <form th:action="@{/company/check-in}" method="post" th:object="${companyVO}">
+        <input th:field="*{companyName}" placeholder="이름 입력" />
+        <input type="hidden" name="flag" />
+        <button type="button">출근</button>
+        <button type="button">퇴근</button>
+    </form>
+</body>
+<script th:inline="javascript">
+    const buttons = document.querySelectorAll("button")
+    const form = document.querySelector("form")
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const flag = e.target.innerText; // 출근 누르면 innerText = "출근", 퇴근 누르면 innerTest = "퇴근"
+            const flagInputValue = document.querySelector("input[name='flag']")
+
+            // 컨트롤러와 연관! 출근 넣으면 getToWork 넣어놓고 submit => back에 넣어줌
+            // method = post => 컨트롤러 @PostMapping
+            flagInputValue.value = flag === "출근" ? "getToWork" : "leaveWork"
+            form.submit();
+        })
+    })
+
+</script>
+</html>

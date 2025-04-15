@@ -29,10 +29,9 @@ public class MemberController {
     private final MemberService memberService;
 
 //  회원가입
-
-//    포워드(요청 조인 응답 조인)
+//    포워드(요청 : 조인 = 응답 : 조인)
 //    join (회원가입페이지에서 보낼 데이터 없음)
-//    member/join.html -> join.html로 컨트롤러 타고옴
+//    member/join.html -> join.html로 컨트롤러 타고 옴
     @GetMapping("join")
     public void goToJoinForm(MemberVO memberVO) {;}
 
@@ -47,24 +46,24 @@ public class MemberController {
         return new RedirectView("/member/login");
     }
 
-//    로그인 페이지 이동 (보내기만 하고 더 할 게 없음)
+//    로그인 페이지 이동 (보내기만 하고 더 할 게 없음!)
     @GetMapping("login")
     public void goToLogin(MemberVO memberVO) {;}
 
 //    로그인
     @PostMapping("login")
     public RedirectView login(MemberVO memberVO, RedirectAttributes redirectAttributes) {
-//        내가 보낸 데이터 잘 들고오는지 확인 (DB 찍고 오지 X 컨트롤러로 바로 옴)
+//        내가 보낸 데이터 잘 들고오는지 확인 (DB 찍고 오지X, 컨트롤러로 바로 옴)
         log.info(memberVO.toString());
 //       검증
         Optional<MemberVO> foundMember = memberMapper.select(memberVO);
 //        null이 아닐때만 값 가져오게 하기
-//            로그인 성공한 경우
+//        로그인 성공한 경우
         if(foundMember.isPresent()) {
 //            로그인된 유저의 정보을 세션에 담기
-            // "member"에는 memberVO의 메모리 주소값이 들어있음 - hashcode - 상태적
-//            메모리 주소값을 session에 저장하는 건 잘못됨(상대적이라 값이 변함) -> 직렬화로 해결
-//            직렬화 : 세션에 들어가는 값들 , VO, DTO
+//            "member"에는 memberVO의 메모리 주소값이 들어있음 - hashcode - 상대적
+//            메모리 주소값을 session에 저장하는 건 잘못됨(상대적이라 값이 변함) -> 직렬화로 해결 (implements Serializable)
+//            직렬화 : 세션에 들어가는 값들, VO, DTO
             session.setAttribute("member", foundMember.get()); // get() : 옵셔널에서 꺼내옴
             session.setAttribute("product", new ProductVO());
             return new RedirectView("/post/list");
@@ -82,6 +81,7 @@ public class MemberController {
 
 //        로그인 실패 시 flash가 false 값 가짐
 //        addFlashAttribute를 관리하는 게 redirectAttributes
+//        redirectAttributes가 addFlashAttribute를 관리
         redirectAttributes.addFlashAttribute("login", false);
         redirectAttributes.addFlashAttribute("code", 12345678);
         return new RedirectView("/member/login");
@@ -92,7 +92,7 @@ public class MemberController {
     @GetMapping("logout")
     public RedirectView logout() {
 //        session.removeAttribute("member"); 
-        session.invalidate(); // 여러 정보를 지울 수 있음
+        session.invalidate(); //  invalidate() : 여러 정보를 지울 수 있음
         return new RedirectView("/member/login");
     }
 

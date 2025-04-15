@@ -52,7 +52,7 @@ public class PostController {
     public void goToWrite(Model model) {
         model.addAttribute("postVO", new PostVO());
 //        *******
-//        write.html console.log => 글 작성하려면 memberId 필요 => session에서 가져오기
+//        write.html console.log => 글 작성하려면 memberId 필요 => session에서 가져오기!
         model.addAttribute("memberId", ((MemberVO)session.getAttribute("member")).getId());
     }
 

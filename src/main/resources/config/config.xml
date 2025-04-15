@@ -12,8 +12,7 @@
         <typeAlias type="com.app.threetier.domain.UserVO" alias="UserVO" />
         <typeAlias type="com.app.threetier.domain.NoticeVO" alias="NoticeVO" />
         <typeAlias type="com.app.threetier.domain.BookVO" alias="BookVO" />
-        <typeAlias type="com.app.threetier.domain.ScoreVO" alias="ScoreVO" />
-        <typeAlias type="com.app.threetier.dto.ScoreDTO" alias="ScoreDTO" />
         <typeAlias type="com.app.threetier.domain.StudentVO" alias="StudentVO" />
+        <typeAlias type="com.app.threetier.domain.CompanyVO" alias="CompanyVO" />
     </typeAliases>
 </configuration>

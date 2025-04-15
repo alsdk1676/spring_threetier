@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 자바의 인터페이스랑 연결 -->
+<mapper namespace="com.app.threetier.mapper.CompanyMapper">
+
+<!--  insert value가 동적쿼리로 들어가야 함! -->
+    <insert id="insert" parameterType="CompanyVO">
+        INSERT INTO TBL_COMPANY
+        <choose>
+            <when test="getToWorkDateTime != null">
+                VALUES(SEQ_COMPANY.NEXTVAL, #{companyName}, TO_DATE(#{getToWorkDateTime}, 'YYYY-MM-DD HH24:MI:SS'), NULL)
+            </when>
+            <otherwise>
+                VALUES(SEQ_COMPANY.NEXTVAL, #{companyName}, NULL, TO_DATE(#{leaveWorkDateTime}, 'YYYY-MM-DD HH24:MI:SS'))
+            </otherwise>
+        </choose>
+    </insert>
+
+
+
+
+</mapper>

@@ -1,7 +1,9 @@
 package com.app.threetier.controller;
 
+import com.app.threetier.domain.CompanyVO;
 import com.app.threetier.domain.ProductVO;
 import com.app.threetier.domain.StudentVO;
+import com.app.threetier.service.CompanyService;
 import com.app.threetier.service.ProductService;
 import com.app.threetier.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @Slf4j
 //@RequestMapping("/product/*")
@@ -22,6 +27,7 @@ public class TaskController {
 
     private final ProductService productService;
     private final StudentService studentService;
+    private final CompanyService companyService;
 
     //    1번 실습
     @GetMapping("/product/write")
@@ -68,6 +74,7 @@ public class TaskController {
         return new RedirectView("/product/list");
     }
 
+//    ==================================================================
 //    2번 실습
     @GetMapping("/student/register")
     public void goToRegister(StudentVO studentVO) {;}
@@ -81,6 +88,64 @@ public class TaskController {
     @GetMapping("/student/result")
     public void goToResultForm(Model model) {
         model.addAttribute("students", studentService.getStudentList());
+    }
+
+//    ===================================================================
+//    3번 실습
+    @GetMapping("/company/check-in")
+    public void goToCheckInForm(CompanyVO companyVO) {;}
+
+    @GetMapping("/company/get-to-work")
+    public void goToGetToWork() {;}
+
+    @GetMapping("/company/leave-work")
+    public void goToLeaveWork() {;}
+
+    @GetMapping("/company/late")
+    public void goToLate() {;}
+
+    @GetMapping("/company/work")
+    public void goToWork() {;}
+
+//    페이지에 도착했을 떄 : 버튼 이미 누른 상태
+    @PostMapping("/company/check-in")
+//    화면에서 어떻게 보낼지 고민 X => 여기서 만들어놓고 화면에서 이렇게 보내라!
+//    flag : 구분점
+    public RedirectView checkIn(CompanyVO companyVO, String flag) {
+        LocalDateTime now = LocalDateTime.now(); // now() : 현재 시, 분, 초
+
+//        자바는 HH가 24, 오라클에서는 HH24가 24 /  MI, mm
+        String format = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        log.info("{}", format);
+//        일하고 있는 시간인지 아닌지
+        int hours = now.getHour();
+        int minutes = now.getMinute();
+
+//        지각
+        boolean lateCondition = hours >= 9 && minutes > 0;
+//        퇴근
+        boolean leaveWorkCondition = hours >= 17 && minutes >= 0;
+
+//        경우 비교
+//        화면에서 받는 flag가 ~..
+//        출근
+        if(!flag.equals("getToWork")) {
+            companyVO.setGetToWorkDateTime(format);
+            companyService.register(companyVO); // 현재 시간 찍힘
+            log.info("{}", companyVO); // 횡단
+
+//            출근 시간 비교해서 초과하면 지각, 아니면 정시 출근
+//            초과 ? 지각 : 정시출근
+            return new RedirectView(lateCondition ? "/company/late" : "/company/get-to-work");
+        }
+//        퇴근 (if문 밖)
+        companyVO.setLeaveWorkDateTime(format); // 현재 시간 넣어줌
+        log.info("{}", companyVO); // 횡단
+        companyService.register(companyVO);
+
+//        최근 시간이면 ? 퇴근 : 땡떙이
+        return new RedirectView(leaveWorkCondition ? "/company/leave-work" : "/company/work");
+
     }
 
 

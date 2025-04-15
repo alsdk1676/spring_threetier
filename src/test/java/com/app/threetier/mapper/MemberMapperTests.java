@@ -28,7 +28,7 @@ public class MemberMapperTests {
         memberVO.setMemberEmail("test123@gmail.com");
         memberVO.setMemberName("홍길동");
         memberVO.setMemberPassword("1234");
-//        memberMapper.select(memberVO).map(MemberVO::toString).ifPresent(log::info);
+//        memberMapper.select(memberVO).map(MemberVO::toString).ifPresent(log::info); (참조형)
         memberMapper.select(memberVO)
                 .map((member) -> memberVO.toString())
                 .ifPresent((member) -> {
