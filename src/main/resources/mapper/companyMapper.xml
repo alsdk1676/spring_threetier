@@ -16,6 +16,18 @@
         </choose>
     </insert>
 
+<!--    <insert id="insert" parameterType="CompanyVO">-->
+<!--        INSERT INTO TBL_COMPANY-->
+<!--        <choose>-->
+<!--            <when test="getToWorkDateTime != null">-->
+<!--                VALUES(SEQ_COMPANY.NEXTVAL, #{companyName}, TO_DATE(#{getToWorkDateTime}, 'YYYY-MM-DD HH24:MI:SS'), NULL)-->
+<!--            </when>-->
+<!--            <otherwise>-->
+<!--                VALUES(SEQ_COMPANY.NEXTVAL, #{companyName}, NULL, TO_DATE(#{leaveWorkDateTime}, 'YYYY-MM-DD HH24:MI:SS'))-->
+<!--            </otherwise>-->
+<!--        </choose>-->
+<!--    </insert>-->
+
 
 
 
